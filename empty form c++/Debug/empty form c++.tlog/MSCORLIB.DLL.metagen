@@ -33,7 +33,7 @@ Class ThisAssembly: AutoLayout, AnsiClass, Class, Abstract, Sealed, BeforeFieldI
     System.String DefaultAlias = mscorlib.dll : Assembly, Static, Literal, HasDefault
     System.String Copyright = © Microsoft Corporation.  All rights reserved. : Assembly, Static, Literal, HasDefault
     System.String Version = 4.0.0.0 : Assembly, Static, Literal, HasDefault
-    System.String InformationalVersion = 4.7.2633.0 : Assembly, Static, Literal, HasDefault
+    System.String InformationalVersion = 4.7.3416.0 : Assembly, Static, Literal, HasDefault
     System.String DailyBuildNumberStr = 30319 : Assembly, Static, Literal, HasDefault
     System.String BuildRevisionStr = 0 : Assembly, Static, Literal, HasDefault
     Int32 DailyBuildNumber = 30319 : Assembly, Static, Literal, HasDefault
@@ -460,8 +460,8 @@ Class Microsoft.Win32.Win32Native: AutoLayout, AnsiClass, Class, Abstract, Seale
     CopyFile(String, String, Boolean): PrivateScope, Assembly, Static, HideBySig, PinvokeImpl
     CreateDirectory(String, SECURITY_ATTRIBUTES): PrivateScope, Assembly, Static, HideBySig, PinvokeImpl
     DeleteFile(String): PrivateScope, Assembly, Static, HideBySig, PinvokeImpl
-    FindFirstFile(String, WIN32_FIND_DATA(In, Out)): PrivateScope, Assembly, Static, HideBySig, PinvokeImpl
-    FindNextFile(SafeFindHandle, WIN32_FIND_DATA(In, Out, HasFieldMarshal)): PrivateScope, Assembly, Static, HideBySig, PinvokeImpl
+    FindFirstFile(String, WIN32_FIND_DATA&): PrivateScope, Assembly, Static, HideBySig, PinvokeImpl
+    FindNextFile(SafeFindHandle, WIN32_FIND_DATA&): PrivateScope, Assembly, Static, HideBySig, PinvokeImpl
     FindClose(IntPtr): PrivateScope, Assembly, Static, HideBySig, PinvokeImpl
     GetCurrentDirectory(Int32, StringBuilder(Out)): PrivateScope, Assembly, Static, HideBySig, PinvokeImpl
     GetFileAttributesEx(String, Int32, WIN32_FILE_ATTRIBUTE_DATA&): PrivateScope, Assembly, Static, HideBySig, PinvokeImpl
@@ -470,7 +470,6 @@ Class Microsoft.Win32.Win32Native: AutoLayout, AnsiClass, Class, Abstract, Seale
     MoveFile(String, String): PrivateScope, Assembly, Static, HideBySig, PinvokeImpl
     RemoveDirectory(String): PrivateScope, Assembly, Static, HideBySig, PinvokeImpl
     SetCurrentDirectory(String): PrivateScope, Assembly, Static, HideBySig, PinvokeImpl
-    SetErrorMode(Int32): PrivateScope, Assembly, Static, HideBySig
     WideCharToMultiByte(UInt32, UInt32, Char*, Int32, Byte*, Int32, IntPtr, IntPtr): PrivateScope, Assembly, Static, HideBySig, PinvokeImpl
     SetConsoleCtrlHandler(ConsoleCtrlHandlerRoutine, Boolean): PrivateScope, Assembly, Static, HideBySig, PinvokeImpl
     SetEnvironmentVariable(String, String): PrivateScope, Assembly, Static, HideBySig, PinvokeImpl
@@ -557,6 +556,7 @@ Class Microsoft.Win32.Win32Native: AutoLayout, AnsiClass, Class, Abstract, Seale
     GetCurrentDirectoryW(UInt32, SafeHandle): PrivateScope, Assembly, Static, HideBySig, PinvokeImpl
     SetFileAttributes(String, Int32): PrivateScope, Assembly, Static, HideBySig, PinvokeImpl
     DeleteVolumeMountPoint(String): PrivateScope, Assembly, Static, HideBySig, PinvokeImpl
+    SetErrorMode(Int32): PrivateScope, Assembly, Static, HideBySig
     CoTaskMemRealloc(IntPtr, UIntPtr): PrivateScope, Assembly, Static, HideBySig, PinvokeImpl
     SetConsoleMode(IntPtr, Int32): PrivateScope, Assembly, Static, HideBySig, PinvokeImpl
     GetConsoleMode(IntPtr, Int32&(Out)): PrivateScope, Assembly, Static, HideBySig, PinvokeImpl
@@ -1063,39 +1063,51 @@ Class System.AppContext: AutoLayout, AnsiClass, Class, Public, Abstract, Sealed,
 Class System.AppContextDefaultValues: AutoLayout, AnsiClass, Class, Abstract, Sealed, BeforeFieldInit
   Fields:
     System.String SwitchNoAsyncCurrentCulture : Assembly, Static, InitOnly
+    System.String SwitchEnforceJapaneseEraYearRanges : Assembly, Static, InitOnly
+    System.String SwitchFormatJapaneseFirstYearAsANumber : Assembly, Static, InitOnly
+    System.String SwitchEnforceLegacyJapaneseDateParsing : Assembly, Static, InitOnly
     System.String SwitchThrowExceptionIfDisposedCancellationTokenSource : Assembly, Static, InitOnly
     System.String SwitchPreserveEventListnerObjectIdentity : Assembly, Static, InitOnly
     System.String SwitchUseLegacyPathHandling : Assembly, Static, InitOnly
     System.String SwitchBlockLongPaths : Assembly, Static, InitOnly
     System.String SwitchDoNotAddrOfCspParentWindowHandle : Assembly, Static, InitOnly
     System.String SwitchSetActorAsReferenceWhenCopyingClaimsIdentity : Assembly, Static, InitOnly
-    System.String SwitchUsePortablePDBsInStackTraces : Assembly, Static, InitOnly
+    System.String SwitchIgnorePortablePDBsInStackTraces : Assembly, Static, InitOnly
     System.String SwitchUseNewMaxArraySize : Assembly, Static, InitOnly
+    System.String SwitchUseNetCoreTimer : Assembly, Static, InitOnly
   Methods:
     PopulateDefaultValues(): PrivateScope, Public, Static, HideBySig
     TryGetSwitchOverride(String, Boolean&(Out)): PrivateScope, Public, Static, HideBySig
 Class System.AppContextSwitches: AutoLayout, AnsiClass, Class, Abstract, Sealed
   Properties:
     Boolean NoAsyncCurrentCulture 'get ' : 
+    Boolean EnforceJapaneseEraYearRanges 'get ' : 
+    Boolean FormatJapaneseFirstYearAsANumber 'get ' : 
+    Boolean EnforceLegacyJapaneseDateParsing 'get ' : 
     Boolean ThrowExceptionIfDisposedCancellationTokenSource 'get ' : 
     Boolean PreserveEventListnerObjectIdentity 'get ' : 
     Boolean UseLegacyPathHandling 'get ' : 
     Boolean BlockLongPaths 'get ' : 
     Boolean SetActorAsReferenceWhenCopyingClaimsIdentity 'get ' : 
     Boolean DoNotAddrOfCspParentWindowHandle 'get ' : 
-    Boolean UsePortablePDBsInStackTraces 'get ' : 
+    Boolean IgnorePortablePDBsInStackTraces 'get ' : 
     Boolean UseNewMaxArraySize 'get ' : 
+    Boolean UseNetCoreTimer 'get ' : 
   Methods:
     get_ThrowExceptionIfDisposedCancellationTokenSource(): PrivateScope, Public, Static, HideBySig, SpecialName
     GetCachedSwitchValue(String, Int32&): PrivateScope, Assembly, Static, HideBySig
     get_NoAsyncCurrentCulture(): PrivateScope, Public, Static, HideBySig, SpecialName
+    get_EnforceJapaneseEraYearRanges(): PrivateScope, Public, Static, HideBySig, SpecialName
+    get_FormatJapaneseFirstYearAsANumber(): PrivateScope, Public, Static, HideBySig, SpecialName
+    get_EnforceLegacyJapaneseDateParsing(): PrivateScope, Public, Static, HideBySig, SpecialName
     get_PreserveEventListnerObjectIdentity(): PrivateScope, Public, Static, HideBySig, SpecialName
     get_UseLegacyPathHandling(): PrivateScope, Public, Static, HideBySig, SpecialName
     get_BlockLongPaths(): PrivateScope, Public, Static, HideBySig, SpecialName
     get_SetActorAsReferenceWhenCopyingClaimsIdentity(): PrivateScope, Public, Static, HideBySig, SpecialName
     get_DoNotAddrOfCspParentWindowHandle(): PrivateScope, Public, Static, HideBySig, SpecialName
-    get_UsePortablePDBsInStackTraces(): PrivateScope, Public, Static, HideBySig, SpecialName
+    get_IgnorePortablePDBsInStackTraces(): PrivateScope, Public, Static, HideBySig, SpecialName
     get_UseNewMaxArraySize(): PrivateScope, Public, Static, HideBySig, SpecialName
+    get_UseNetCoreTimer(): PrivateScope, Public, Static, HideBySig, SpecialName
 Class System.Object: AutoLayout, AnsiClass, Class, Public, Serializable, BeforeFieldInit
     Void .ctor(): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
   Methods:
@@ -2187,12 +2199,10 @@ Class System.String: AutoLayout, AnsiClass, Class, Public, Sealed, Serializable,
     Char Chars [Int32] 'get ' : 
     Int32 Length 'get ' : 
   Methods:
-    IsNullOrEmpty(String): PrivateScope, Public, Static, HideBySig
+    get_Chars(Int32): PrivateScope, Public, HideBySig, SpecialName
     StartsWith(String): PrivateScope, Public, HideBySig
     StartsWith(String, StringComparison): PrivateScope, Public, HideBySig
     StartsWith(String, Boolean, CultureInfo): PrivateScope, Public, HideBySig
-    Substring(Int32): PrivateScope, Public, HideBySig
-    Substring(Int32, Int32): PrivateScope, Public, HideBySig
     Join(String, String[]): PrivateScope, Public, Static, HideBySig
     Join(String, Object[]): PrivateScope, Public, Static, HideBySig
     Join(String, IEnumerable`1): PrivateScope, Public, Static, HideBySig
@@ -2209,10 +2219,10 @@ Class System.String: AutoLayout, AnsiClass, Class, Public, Sealed, Serializable,
     Equals(String, String, StringComparison): PrivateScope, Public, Static, HideBySig
     op_Equality(String, String): PrivateScope, Public, Static, HideBySig, SpecialName
     op_Inequality(String, String): PrivateScope, Public, Static, HideBySig, SpecialName
-    get_Chars(Int32): PrivateScope, Public, HideBySig, SpecialName
     CopyTo(Int32, Char[], Int32, Int32): PrivateScope, Public, HideBySig
     ToCharArray(): PrivateScope, Public, HideBySig
     ToCharArray(Int32, Int32): PrivateScope, Public, HideBySig
+    IsNullOrEmpty(String): PrivateScope, Public, Static, HideBySig
     IsNullOrWhiteSpace(String): PrivateScope, Public, Static, HideBySig
     InternalMarvin32HashString(String, Int32, Int64): PrivateScope, Assembly, Static, HideBySig
     UseRandomizedHashing(): PrivateScope, Assembly, Static, HideBySig
@@ -2226,6 +2236,8 @@ Class System.String: AutoLayout, AnsiClass, Class, Public, Sealed, Serializable,
     SplitInternal(Char[], Int32, StringSplitOptions): PrivateScope, Assembly, HideBySig
     Split(String[], StringSplitOptions): PrivateScope, Public, HideBySig
     Split(String[], Int32, StringSplitOptions): PrivateScope, Public, HideBySig
+    Substring(Int32): PrivateScope, Public, HideBySig
+    Substring(Int32, Int32): PrivateScope, Public, HideBySig
     Trim(Char[]): PrivateScope, Public, HideBySig
     TrimStart(Char[]): PrivateScope, Public, HideBySig
     TrimEnd(Char[]): PrivateScope, Public, HideBySig
@@ -2500,6 +2512,7 @@ Struct System.DateTime: AutoLayout, AnsiClass, Class, Public, Sealed, Serializab
     System.IComparable`1[System.DateTime]
     System.IEquatable`1[System.DateTime]
   Fields:
+    Boolean s_isLeapSecondsSupportedSystem : Assembly, Static, InitOnly
     System.DateTime MinValue : Public, Static, InitOnly
     System.DateTime MaxValue : Public, Static, InitOnly
     Int32 DaysTo1970 = 719162 : Assembly, Static, Literal, HasDefault
@@ -2554,6 +2567,7 @@ Struct System.DateTime: AutoLayout, AnsiClass, Class, Public, Sealed, Serializab
     ToBinary(): PrivateScope, Public, HideBySig
     ToBinaryRaw(): PrivateScope, Assembly, HideBySig
     get_Date(): PrivateScope, Public, HideBySig, SpecialName
+    GetDatePart(Int32&(Out), Int32&(Out), Int32&(Out)): PrivateScope, Assembly, HideBySig
     get_Day(): PrivateScope, Public, HideBySig, SpecialName
     get_DayOfWeek(): PrivateScope, Public, HideBySig, SpecialName
     get_DayOfYear(): PrivateScope, Public, HideBySig, SpecialName
@@ -2614,6 +2628,15 @@ Struct System.DateTime: AutoLayout, AnsiClass, Class, Public, Sealed, Serializab
     GetDateTimeFormats(Char, IFormatProvider): PrivateScope, Public, HideBySig
     GetTypeCode(): PrivateScope, Public, Final, Virtual, HideBySig, VtableLayoutMask
     TryCreate(Int32, Int32, Int32, Int32, Int32, Int32, Int32, DateTime&(Out)): PrivateScope, Assembly, Static, HideBySig
+    ValidateSystemTime(FullSystemTime&, Boolean): PrivateScope, Assembly, Static, HideBySig
+    GetSystemTimeWithLeapSecondsHandling(FullSystemTime&): PrivateScope, Assembly, Static, HideBySig
+    IsLeapSecondsSupportedSystem(): PrivateScope, Assembly, Static, HideBySig
+    SystemFileTimeToSystemTime(Int64, FullSystemTime&): PrivateScope, Assembly, Static, HideBySig
+    SystemTimeToSystemFileTime(FullSystemTime&, Int64&): PrivateScope, Assembly, Static, HideBySig
+    InternalFromFileTime(Int64): PrivateScope, Assembly, Static, HideBySig
+    InternalToFileTime(Int64): PrivateScope, Assembly, Static, HideBySig
+    CreateDateTimeFromSystemTime(FullSystemTime&): PrivateScope, Assembly, Static, HideBySig
+    IsValidTimeWithLeapSeconds(Int32, Int32, Int32, Int32, Int32, Int32, DateTimeKind): PrivateScope, Assembly, Static, HideBySig
 Struct System.DateTimeKind: AutoLayout, AnsiClass, Class, Public, Sealed, Serializable
   :System.Enum
   Fields:
@@ -6437,7 +6460,6 @@ Struct System.RuntimeTypeHandle: AutoLayout, AnsiClass, Class, Public, Sequentia
     GetTypeByName(String, Boolean, Boolean, Boolean, StackCrawlMark&, IntPtr, Boolean): PrivateScope, Assembly, Static, HideBySig
     GetInstantiation(RuntimeTypeHandle, ObjectHandleOnStack, Boolean): PrivateScope, Assembly, Static, HideBySig, PinvokeImpl, HasSecurity
     Instantiate(Type[]): PrivateScope, Assembly, HideBySig
-    IsCollectible(RuntimeTypeHandle): PrivateScope, Assembly, Static, HideBySig, PinvokeImpl, HasSecurity
     HasInstantiation(RuntimeType): PrivateScope, Assembly, Static, HideBySig
     IsGenericTypeDefinition(RuntimeType): PrivateScope, Assembly, Static, HideBySig
     IsGenericVariable(RuntimeType): PrivateScope, Assembly, Static, HideBySig
@@ -6487,6 +6509,7 @@ Struct System.RuntimeTypeHandle: AutoLayout, AnsiClass, Class, Public, Sequentia
     MakeSZArray(): PrivateScope, Assembly, HideBySig
     MakeByRef(): PrivateScope, Assembly, HideBySig
     MakePointer(): PrivateScope, Assembly, HideBySig
+    IsCollectible(RuntimeTypeHandle): PrivateScope, Assembly, Static, HideBySig, PinvokeImpl, HasSecurity
     HasInstantiation(): PrivateScope, Assembly, HideBySig
     GetGenericTypeDefinition(RuntimeType): PrivateScope, Assembly, Static, HideBySig
     IsGenericVariable(): PrivateScope, Assembly, HideBySig
@@ -7694,19 +7717,26 @@ Class System.DateTimeFormat: AutoLayout, AnsiClass, Class, Abstract, Sealed, Bef
   Fields:
     System.TimeSpan NullOffset : Assembly, Static, InitOnly
     Char[] allStandardFormats : Assembly, Static
+    System.Globalization.DateTimeFormatInfo InvariantFormatInfo : Assembly, Static, InitOnly
+    System.String[] InvariantAbbreviatedMonthNames : Assembly, Static, InitOnly
+    System.String[] InvariantAbbreviatedDayNames : Assembly, Static, InitOnly
     System.String[] fixedNumberFormats : Assembly, Static
     Int32 MaxSecondsFractionDigits = 7 : Assembly, Static, Literal, HasDefault
     System.String RoundtripFormat = yyyy'-'MM'-'dd'T'HH':'mm':'ss.fffffffK : Assembly, Static, Literal, HasDefault
     System.String RoundtripDateTimeUnfixed = yyyy'-'MM'-'ddTHH':'mm':'ss zzz : Assembly, Static, Literal, HasDefault
+    System.String Gmt = GMT : Assembly, Static, Literal, HasDefault
   Methods:
     GetRealFormat(String, DateTimeFormatInfo): PrivateScope, Assembly, Static, HideBySig
     Format(DateTime, String, DateTimeFormatInfo): PrivateScope, Assembly, Static, HideBySig
     Format(DateTime, String, DateTimeFormatInfo, TimeSpan): PrivateScope, Assembly, Static, HideBySig
+    FastFormatRfc1123(DateTime, TimeSpan, DateTimeFormatInfo): PrivateScope, Assembly, Static, HideBySig
     FormatDigits(StringBuilder, Int32, Int32): PrivateScope, Assembly, Static, HideBySig
     FormatDigits(StringBuilder, Int32, Int32, Boolean): PrivateScope, Assembly, Static, HideBySig
     ParseRepeatPattern(String, Int32, Char): PrivateScope, Assembly, Static, HideBySig
     ParseQuoteString(String, Int32, StringBuilder): PrivateScope, Assembly, Static, HideBySig
     ParseNextChar(String, Int32): PrivateScope, Assembly, Static, HideBySig
+    FastFormatRoundtrip(DateTime, TimeSpan): PrivateScope, Assembly, Static, HideBySig
+    AppendNumber(StringBuilder, Int64, Int32): PrivateScope, Assembly, Static, HideBySig
     GetAllDateTimes(DateTime, Char, DateTimeFormatInfo): PrivateScope, Assembly, Static, HideBySig
     GetAllDateTimes(DateTime, DateTimeFormatInfo): PrivateScope, Assembly, Static, HideBySig
     InvalidFormatForLocal(String, DateTime): PrivateScope, Assembly, Static, HideBySig
@@ -8193,6 +8223,7 @@ Class System.IO.DirectoryInfo: AutoLayout, AnsiClass, Class, Public, Sealed, Ser
   :System.IO.FileSystemInfo
     Void .ctor(System.String): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
     Void .ctor(System.String, Boolean): PrivateScope, Assembly, HideBySig, SpecialName, RTSpecialName
+    Void .ctor(System.String, System.String): PrivateScope, Assembly, HideBySig, SpecialName, RTSpecialName
   Properties:
     System.String Name 'get ' : 
     System.String FullName 'get ' : 
@@ -8376,6 +8407,7 @@ Class System.IO.FileInfo: AutoLayout, AnsiClass, Class, Public, Sealed, Serializ
   :System.IO.FileSystemInfo
     Void .ctor(System.String): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
     Void .ctor(System.String, Boolean): PrivateScope, Assembly, HideBySig, SpecialName, RTSpecialName
+    Void .ctor(System.String, System.String): PrivateScope, Assembly, HideBySig, SpecialName, RTSpecialName
   Properties:
     System.String Name 'get ' : 
     Int64 Length 'get ' : 
@@ -8626,46 +8658,34 @@ Class System.IO.FileSystemEnumerableIterator`1[TSource]: AutoLayout, AnsiClass, 
 Class System.IO.SearchResultHandler`1[TSource]: AutoLayout, AnsiClass, Class, Abstract, BeforeFieldInit
   Type parameter: TSource
   Methods:
-    IsResultIncluded(SearchResult): PrivateScope, Assembly, Virtual, HideBySig, VtableLayoutMask, CheckAccessOnOverride, Abstract
-    CreateObject(SearchResult): PrivateScope, Assembly, Virtual, HideBySig, VtableLayoutMask, CheckAccessOnOverride, Abstract
+    IsResultIncluded(WIN32_FIND_DATA&): PrivateScope, Assembly, Virtual, HideBySig, VtableLayoutMask, CheckAccessOnOverride, Abstract
+    CreateObject(SearchData, WIN32_FIND_DATA&): PrivateScope, Assembly, Virtual, HideBySig, VtableLayoutMask, CheckAccessOnOverride, Abstract
 Class System.IO.StringResultHandler: AutoLayout, AnsiClass, Class, BeforeFieldInit
   :System.IO.SearchResultHandler`1[System.String]
     Void .ctor(Boolean, Boolean): PrivateScope, Assembly, HideBySig, SpecialName, RTSpecialName
   Methods:
-    IsResultIncluded(SearchResult): PrivateScope, Assembly, Virtual, HideBySig, CheckAccessOnOverride
-    CreateObject(SearchResult): PrivateScope, Assembly, Virtual, HideBySig, CheckAccessOnOverride
+    IsResultIncluded(WIN32_FIND_DATA&): PrivateScope, Assembly, Virtual, HideBySig, CheckAccessOnOverride
+    CreateObject(SearchData, WIN32_FIND_DATA&): PrivateScope, Assembly, Virtual, HideBySig, CheckAccessOnOverride
 Class System.IO.FileInfoResultHandler: AutoLayout, AnsiClass, Class, BeforeFieldInit
   :System.IO.SearchResultHandler`1[System.IO.FileInfo]
     Void .ctor(): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
   Methods:
-    IsResultIncluded(SearchResult): PrivateScope, Assembly, Virtual, HideBySig, CheckAccessOnOverride
-    CreateObject(SearchResult): PrivateScope, Assembly, Virtual, HideBySig, CheckAccessOnOverride
+    CreateFileInfo(SearchData, WIN32_FIND_DATA&): PrivateScope, Assembly, Static, HideBySig
+    IsResultIncluded(WIN32_FIND_DATA&): PrivateScope, Assembly, Virtual, HideBySig, CheckAccessOnOverride
+    CreateObject(SearchData, WIN32_FIND_DATA&): PrivateScope, Assembly, Virtual, HideBySig, CheckAccessOnOverride
 Class System.IO.DirectoryInfoResultHandler: AutoLayout, AnsiClass, Class, BeforeFieldInit
   :System.IO.SearchResultHandler`1[System.IO.DirectoryInfo]
     Void .ctor(): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
   Methods:
-    CreateObject(SearchResult): PrivateScope, Assembly, Virtual, HideBySig, CheckAccessOnOverride
-    IsResultIncluded(SearchResult): PrivateScope, Assembly, Virtual, HideBySig, CheckAccessOnOverride
+    CreateObject(SearchData, WIN32_FIND_DATA&): PrivateScope, Assembly, Virtual, HideBySig, CheckAccessOnOverride
+    CreateDirectoryInfo(SearchData, WIN32_FIND_DATA&): PrivateScope, Assembly, Static, HideBySig
+    IsResultIncluded(WIN32_FIND_DATA&): PrivateScope, Assembly, Virtual, HideBySig, CheckAccessOnOverride
 Class System.IO.FileSystemInfoResultHandler: AutoLayout, AnsiClass, Class, BeforeFieldInit
   :System.IO.SearchResultHandler`1[System.IO.FileSystemInfo]
     Void .ctor(): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
   Methods:
-    IsResultIncluded(SearchResult): PrivateScope, Assembly, Virtual, HideBySig, CheckAccessOnOverride
-    CreateObject(SearchResult): PrivateScope, Assembly, Virtual, HideBySig, CheckAccessOnOverride
-Class System.IO.SearchResult: AutoLayout, AnsiClass, Class, Sealed, BeforeFieldInit
-    Void .ctor(System.String, System.String, WIN32_FIND_DATA): PrivateScope, Assembly, HideBySig, SpecialName, RTSpecialName
-  Properties:
-    System.String FullPath 'get ' : 
-    System.String UserPath 'get ' : 
-    WIN32_FIND_DATA FindData 'get ' : 
-  Methods:
-    get_FullPath(): PrivateScope, Assembly, HideBySig, SpecialName
-    get_UserPath(): PrivateScope, Assembly, HideBySig, SpecialName
-    get_FindData(): PrivateScope, Assembly, HideBySig, SpecialName
-Class System.IO.FileSystemEnumerableHelpers: AutoLayout, AnsiClass, Class, Abstract, Sealed, BeforeFieldInit
-  Methods:
-    IsDir(WIN32_FIND_DATA): PrivateScope, Assembly, Static, HideBySig
-    IsFile(WIN32_FIND_DATA): PrivateScope, Assembly, Static, HideBySig
+    IsResultIncluded(WIN32_FIND_DATA&): PrivateScope, Assembly, Virtual, HideBySig, CheckAccessOnOverride
+    CreateObject(SearchData, WIN32_FIND_DATA&): PrivateScope, Assembly, Virtual, HideBySig, CheckAccessOnOverride
 Class System.IO.FileSystemInfo: AutoLayout, AnsiClass, Class, Public, Abstract, Serializable, HasSecurity, BeforeFieldInit
   :System.MarshalByRefObject
   Interfaces:
@@ -8689,7 +8709,7 @@ Class System.IO.FileSystemInfo: AutoLayout, AnsiClass, Class, Public, Abstract, 
     System.IO.FileAttributes Attributes 'get set' : 
     System.String DisplayPath 'get set' : 
   Methods:
-    InitializeFrom(WIN32_FIND_DATA): PrivateScope, Assembly, HideBySig
+    InitializeFrom(WIN32_FIND_DATA&): PrivateScope, Assembly, HideBySig
     get_FullName(): PrivateScope, Public, Virtual, HideBySig, VtableLayoutMask, SpecialName
     get_UnsafeGetFullName(): PrivateScope, Assembly, Virtual, HideBySig, VtableLayoutMask, CheckAccessOnOverride, SpecialName
     get_Extension(): PrivateScope, Public, HideBySig, SpecialName
@@ -8841,6 +8861,7 @@ Class System.IO.Path: AutoLayout, AnsiClass, Class, Public, Abstract, Sealed, Be
     Combine(String, String, String): PrivateScope, Public, Static, HideBySig
     Combine(String, String, String, String): PrivateScope, Public, Static, HideBySig
     Combine(String[]): PrivateScope, Public, Static, HideBySig
+    CombineNoChecks(String, String): PrivateScope, Assembly, Static, HideBySig
     ToBase32StringSuitableForDirName(Byte[]): PrivateScope, Assembly, Static, HideBySig
     CheckSearchPattern(String): PrivateScope, Assembly, Static, HideBySig
     CheckInvalidPathChars(String, Boolean(Optional, HasDefault)): PrivateScope, Assembly, Static, HideBySig
@@ -11822,6 +11843,7 @@ Struct System.Security.Cryptography.CryptoStreamMode: AutoLayout, AnsiClass, Cla
 Class System.Security.Cryptography.CryptoStream: AutoLayout, AnsiClass, Class, Public, BeforeFieldInit
   :System.IO.Stream
     Void .ctor(System.IO.Stream, System.Security.Cryptography.ICryptoTransform, System.Security.Cryptography.CryptoStreamMode): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+    Void .ctor(System.IO.Stream, System.Security.Cryptography.ICryptoTransform, System.Security.Cryptography.CryptoStreamMode, Boolean): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
   Properties:
     Boolean CanRead 'get ' : 
     Boolean CanSeek 'get ' : 
@@ -11889,6 +11911,8 @@ Class System.Security.Cryptography.DSA: AutoLayout, AnsiClass, Class, Public, Ab
   Methods:
     Create(): PrivateScope, Public, Static, HideBySig
     Create(String): PrivateScope, Public, Static, HideBySig
+    Create(Int32): PrivateScope, Public, Static, HideBySig
+    Create(DSAParameters): PrivateScope, Public, Static, HideBySig
     CreateSignature(Byte[]): PrivateScope, Public, Virtual, HideBySig, VtableLayoutMask, Abstract
     VerifySignature(Byte[], Byte[]): PrivateScope, Public, Virtual, HideBySig, VtableLayoutMask, Abstract
     SignData(Byte[], HashAlgorithmName): PrivateScope, Public, HideBySig
@@ -12239,9 +12263,12 @@ Class System.Security.Cryptography.Rfc2898DeriveBytes: AutoLayout, AnsiClass, Cl
   :System.Security.Cryptography.DeriveBytes
     Void .ctor(System.String, Int32): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
     Void .ctor(System.String, Int32, Int32): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+    Void .ctor(System.String, Int32, Int32, System.Security.Cryptography.HashAlgorithmName): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
     Void .ctor(System.String, Byte[]): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
     Void .ctor(System.String, Byte[], Int32): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+    Void .ctor(System.String, Byte[], Int32, System.Security.Cryptography.HashAlgorithmName): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
     Void .ctor(Byte[], Byte[], Int32): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+    Void .ctor(Byte[], Byte[], Int32, System.Security.Cryptography.HashAlgorithmName): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
   Properties:
     Int32 IterationCount 'get set' : 
     Byte[] Salt 'get set' : 
@@ -12282,6 +12309,8 @@ Class System.Security.Cryptography.RSA: AutoLayout, AnsiClass, Class, Public, Ab
   Methods:
     Create(): PrivateScope, Public, Static, HideBySig
     Create(String): PrivateScope, Public, Static, HideBySig
+    Create(Int32): PrivateScope, Public, Static, HideBySig
+    Create(RSAParameters): PrivateScope, Public, Static, HideBySig
     Encrypt(Byte[], RSAEncryptionPadding): PrivateScope, Public, Virtual, HideBySig, VtableLayoutMask
     Decrypt(Byte[], RSAEncryptionPadding): PrivateScope, Public, Virtual, HideBySig, VtableLayoutMask
     SignHash(Byte[], HashAlgorithmName, RSASignaturePadding): PrivateScope, Public, Virtual, HideBySig, VtableLayoutMask
@@ -12856,6 +12885,8 @@ Class System.Security.Cryptography.X509Certificates.X509Constants: AutoLayout, A
     UInt32 CRYPT_USER_PROTECTED = 2 : Assembly, Static, Literal, HasDefault
     UInt32 CRYPT_MACHINE_KEYSET = 32 : Assembly, Static, Literal, HasDefault
     UInt32 CRYPT_USER_KEYSET = 4096 : Assembly, Static, Literal, HasDefault
+    UInt32 PKCS12_ALWAYS_CNG_KSP = 512 : Assembly, Static, Literal, HasDefault
+    UInt32 PKCS12_NO_PERSIST_KEY = 32768 : Assembly, Static, Literal, HasDefault
     UInt32 CERT_QUERY_CONTENT_CERT = 1 : Assembly, Static, Literal, HasDefault
     UInt32 CERT_QUERY_CONTENT_CTL = 2 : Assembly, Static, Literal, HasDefault
     UInt32 CERT_QUERY_CONTENT_CRL = 3 : Assembly, Static, Literal, HasDefault
@@ -12978,6 +13009,7 @@ Struct System.Security.Cryptography.X509Certificates.X509KeyStorageFlags: AutoLa
     System.Security.Cryptography.X509Certificates.X509KeyStorageFlags Exportable = 4 : Public, Static, Literal, HasDefault
     System.Security.Cryptography.X509Certificates.X509KeyStorageFlags UserProtected = 8 : Public, Static, Literal, HasDefault
     System.Security.Cryptography.X509Certificates.X509KeyStorageFlags PersistKeySet = 16 : Public, Static, Literal, HasDefault
+    System.Security.Cryptography.X509Certificates.X509KeyStorageFlags EphemeralKeySet = 32 : Public, Static, Literal, HasDefault
 Class System.Security.Cryptography.X509Certificates.X509Certificate: AutoLayout, AnsiClass, Class, Public, Serializable, BeforeFieldInit
     Void .ctor(): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
     Void .ctor(Byte[]): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
@@ -12997,6 +13029,8 @@ Class System.Security.Cryptography.X509Certificates.X509Certificate: AutoLayout,
     System.IDisposable
     System.Runtime.Serialization.IDeserializationCallback
     System.Runtime.Serialization.ISerializable
+  Fields:
+    System.Security.Cryptography.X509Certificates.X509KeyStorageFlags KeyStorageFlagsAll = 63 : Assembly, Static, Literal, HasDefault
   Properties:
     IntPtr Handle 'get ' : 
     System.String Issuer 'get ' : 
@@ -16511,11 +16545,4 @@ Struct System.Globalization.CalendarAlgorithmType: AutoLayout, AnsiClass, Class,
     Int32 value__ : Public, SpecialName, RTSpecialName
     System.Globalization.CalendarAlgorithmType Unknown = 0 : Public, Static, Literal, HasDefault
     System.Globalization.CalendarAlgorithmType SolarCalendar = 1 : Public, Static, Literal, HasDefault
-    System.Globalization.CalendarAlgorithmType LunarCalendar = 2 : Public, Static, Literal, HasDefault
-    System.Globalization.CalendarAlgorithmType LunisolarCalendar = 3 : Public, Static, Literal, HasDefault
-Struct System.Globalization.CalendarWeekRule: AutoLayout, AnsiClass, Class, Public, Sealed, Serializable
-  :System.Enum
-  Fields:
-    Int32 value__ : Public, SpecialName, RTSpecialName
-    System.Globalization.CalendarWeekRule FirstDay = 0 : Public, Static, Literal, HasDefault
-    System.Globalization.CalendarWeekRule FirstFu
+    
